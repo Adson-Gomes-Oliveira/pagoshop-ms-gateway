@@ -4,6 +4,7 @@ const helmet = require('helmet');
 const cors = require('cors');
 const axios = require('axios');
 const routes = require('./routes');
+const errorMiddleware = require('./middlewares/error.middleware');
 
 const app = express();
 
@@ -14,9 +15,11 @@ axios.interceptor.request.use((config) => {
   config.headers.gatewayPass = true;
 });
 
+app.get('/health-check', (_req, res) => res.status(200).send('Connection OK'));
 app.use('/api/products', routes.productsRoutes);
 app.use('/api/accounts', routes.accountsRoutes);
 app.use('/api/orders', routes.ordersRoutes);
 app.use('/api/payments', routes.paymentsRoutes);
+app.use(errorMiddleware);
 
 module.exports = app;
