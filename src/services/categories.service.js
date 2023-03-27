@@ -20,7 +20,7 @@ const updateCategory = async (id, payload) => {
   return response;
 }
 
-const updateStatusCategory = async (id, payload) => {
+const updateCategoryStatus = async (id, payload) => {
   const response = await axios.patch(`http://${process.env.CATEGORY_HOST}:3001/api/categories/${id}`, payload);
   return response;
 };
@@ -35,6 +35,6 @@ module.exports = {
   getOneCategory,
   createCategory,
   updateCategory,
-  updateStatusCategory,
+  updateCategoryStatus,
   deleteCategory,
 }

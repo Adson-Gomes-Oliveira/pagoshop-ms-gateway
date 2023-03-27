@@ -7,8 +7,9 @@ const routes = require('./routes');
 
 const app = express();
 
+app.use(express.json());
 app.use(helmet());
-app.use(cors());
+app.use(cors({ exposedHeaders: 'Authorization' }));
 axios.interceptor.request.use((config) => {
   config.headers.gatewayPass = true;
 });
