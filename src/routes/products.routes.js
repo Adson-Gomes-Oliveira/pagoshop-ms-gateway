@@ -1,12 +1,12 @@
 const { Router } = require('express');
-const paymentsControllers = require('../controllers/payments.controller');
+const productsControllers = require('../controllers/products.controller');
 
 const router = Router();
 
-router.get('/', paymentsControllers.getPayments);
-router.get('/:id', paymentsControllers.getOnePayment);
-router.post('/', paymentsControllers.createPayment);
-router.put('/confirm/:id', paymentsControllers.confirmPayment);
-router.patch('/cancel/:id', paymentsControllers.cancelPayment);
+router.get('/', productsControllers.getProducts);
+router.get('/:id', productsControllers.getOneProduct);
+router.post('/', productsControllers.createProduct);
+router.put('/:id', productsControllers.updateProduct);
+router.patch('/:id', productsControllers.deleteProduct);
 
 module.exports = router;

@@ -5,6 +5,9 @@ const router = Router();
 
 router.get('/', categoriesControllers.getCategories);
 router.get('/:id', categoriesControllers.getOneCategory);
+
+router.use(passport.authenticate('bearer', { session: false }));
+
 router.post('/', categoriesControllers.createCategory);
 router.put('/:id', categoriesControllers.updateCategory);
 router.patch('/:id', categoriesControllers.updateCategoryStatus);
