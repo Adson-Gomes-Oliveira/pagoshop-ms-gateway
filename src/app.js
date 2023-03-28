@@ -12,8 +12,12 @@ const app = express();
 app.use(express.json());
 app.use(helmet());
 app.use(cors({ exposedHeaders: 'Authorization' }));
+
 axios.interceptor.request.use((config) => {
-  config.headers.gatewayPass = true;
+  const request = { ...config };
+  request.headers.gatewayPass = true;
+
+  return request;
 });
 
 app.get('/health-check', (_req, res) => res.status(200).send('Connection OK'));

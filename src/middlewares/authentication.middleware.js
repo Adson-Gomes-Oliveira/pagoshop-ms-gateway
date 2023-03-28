@@ -25,7 +25,7 @@ passport.use(
 
     delete userByEmail.password;
     return done(null, userByEmail);
-  })
+  }),
 );
 
 passport.use(
@@ -33,7 +33,7 @@ passport.use(
     async (token, done) => {
       try {
         const tokenExistsInBlocklist = await blocklist.verifyTokenInBlocklist(token);
-        if (tokenExistsInBlocklist) return  done(CustomError('Token logged out !', HTTPStatus.BAD_REQUEST));
+        if (tokenExistsInBlocklist) return done(CustomError('Token logged out !', HTTPStatus.BAD_REQUEST));
 
         const user = verifyToken(token);
 
@@ -42,6 +42,6 @@ passport.use(
       } catch (err) {
         return done(err);
       }
-    }
-  )
-)
+    },
+  ),
+);
