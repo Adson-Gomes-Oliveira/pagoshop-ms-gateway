@@ -1,4 +1,5 @@
 require('express-async-errors');
+require('./middlewares/authentication.middleware');
 const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
@@ -16,6 +17,7 @@ axios.interceptor.request.use((config) => {
 });
 
 app.get('/health-check', (_req, res) => res.status(200).send('Connection OK'));
+app.use('/api', routes.authenticationRoutes);
 app.use('/api/products', routes.productsRoutes);
 app.use('/api/accounts', routes.accountsRoutes);
 app.use('/api/orders', routes.ordersRoutes);
