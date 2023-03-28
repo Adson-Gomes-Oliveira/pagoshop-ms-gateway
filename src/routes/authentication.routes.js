@@ -5,7 +5,9 @@ const authenticationControllers = require('../controllers/authentication.control
 const router = Router();
 
 router.post('/login', passport.authenticate('local', { session: false }) ,authenticationControllers.login);
-router.use(passport.authenticate('bearer', { session: false }))
+
+router.use(passport.authenticate('bearer', { session: false }));
+
 router.get('/logout', authenticationControllers.logout);
 
 module.exports = router;
