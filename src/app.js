@@ -3,7 +3,6 @@ require('./middlewares/authentication.middleware');
 const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
-const axios = require('axios');
 const routes = require('./routes');
 const errorMiddleware = require('./middlewares/error.middleware');
 
@@ -13,15 +12,8 @@ app.use(express.json());
 app.use(helmet());
 app.use(cors({ exposedHeaders: 'Authorization' }));
 
-axios.interceptor.request.use((config) => {
-  const request = { ...config };
-  request.headers.gatewayPass = true;
-
-  return request;
-});
-
 app.get('/health-check', (_req, res) => res.status(200).send('Connection OK'));
-app.use('/api', routes.authenticationRoutes);
+app.use('/api/auth', routes.authenticationRoutes);
 app.use('/api/products', routes.productsRoutes);
 app.use('/api/accounts', routes.accountsRoutes);
 app.use('/api/orders', routes.ordersRoutes);

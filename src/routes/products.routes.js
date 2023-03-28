@@ -1,3 +1,4 @@
+const axios = require('axios').default;
 const passport = require('passport');
 const { Router } = require('express');
 const productsControllers = require('../controllers/products.controller');
@@ -5,6 +6,7 @@ const mongooseIdValidation = require('../middlewares/mongooseID.middleware');
 
 const router = Router();
 
+axios.defaults.headers.common.gatewayPass = true;
 router.get('/', productsControllers.getProducts);
 router.get('/:id', mongooseIdValidation, productsControllers.getOneProduct);
 

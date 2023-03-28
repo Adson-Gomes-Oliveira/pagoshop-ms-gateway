@@ -1,10 +1,12 @@
+const axios = require('axios').default;
 const passport = require('passport');
 const { Router } = require('express');
 const authenticationControllers = require('../controllers/authentication.controller');
 
 const router = Router();
 
-router.post('/login', passport.authenticate('local', { session: false }) ,authenticationControllers.login);
+axios.defaults.headers.common.gatewayPass = true;
+router.post('/login', passport.authenticate('local', { session: false }), authenticationControllers.login);
 
 router.use(passport.authenticate('bearer', { session: false }));
 

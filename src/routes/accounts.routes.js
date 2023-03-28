@@ -1,3 +1,4 @@
+const axios = require('axios').default;
 const passport = require('passport');
 const { Router } = require('express');
 const accountsControllers = require('../controllers/accounts.controller');
@@ -5,6 +6,7 @@ const mongooseIdValidation = require('../middlewares/mongooseID.middleware');
 
 const router = Router();
 
+axios.defaults.headers.common.gatewayPass = true;
 router.post('/', accountsControllers.createAccount);
 
 router.use(passport.authenticate('bearer', { session: false }));
