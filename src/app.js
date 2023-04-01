@@ -15,6 +15,7 @@ app.use(cors({ exposedHeaders: 'Authorization' }));
 app.get('/health-check', (_req, res) => res.status(200).send('Connection OK'));
 app.use('/api/auth', routes.authenticationRoutes);
 app.use('/api/products', routes.productsRoutes);
+app.use('/api/categories', routes.categoriesRoutes);
 app.use('/api/accounts', routes.accountsRoutes);
 app.use('/api/orders', routes.ordersRoutes);
 app.use('/api/payments', routes.paymentsRoutes);

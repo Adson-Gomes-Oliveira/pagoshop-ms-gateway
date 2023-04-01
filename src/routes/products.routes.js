@@ -14,6 +14,6 @@ router.use(passport.authenticate('bearer', { session: false }));
 
 router.post('/', productsControllers.createProduct);
 router.put('/:id', mongooseIdValidation, productsControllers.updateProduct);
-router.patch('/:id', mongooseIdValidation, productsControllers.deleteProduct);
+router.delete('/:id', mongooseIdValidation, productsControllers.deleteProduct);
 
 module.exports = router;

@@ -26,4 +26,9 @@ services:
 
 volumes:
   redis-gateway-volume-docker:
+
+networks: 
+  default:
+    name: trooper-network
+    external: true
     
