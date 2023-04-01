@@ -1,0 +1,26 @@
+version: '3.9'
+services:
+  trooper-ms-gateway:
+    container_name: ms-gateway
+    build: ./
+    ports:
+      - 5000:5000
+    volumes:
+      - ./:/app/ms-gateway
+    environment:
+      - PORT=5000
+      - PRODUCT_HOST=ms-product
+      - CATEGORY_HOST=ms-product
+      - ACCOUNT_HOST=ms-account
+      - ORDER_HOST=ms-order
+      - PAYMENT_HOST=ms-payment
+      - REDIS_HOST=redis-ms-gateway
+      - JWT_SECRET=MTk4OGExOTZkMWYyOWZjZjlmOTcwMWVjZWRjMzc1MzZkOGM0MmFjMjQ0NjcyZjIzZDQwOGU4YTQ1YWQ3NTRjZA==
+  
+  redis-ms-gateway:
+    image: redis:7
+    ports:
+      - 6379:6379
+    volumes:
+      - redis-gateway-volume-docker:/data
+    
