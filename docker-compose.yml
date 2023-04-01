@@ -23,4 +23,7 @@ services:
       - 6379:6379
     volumes:
       - redis-gateway-volume-docker:/data
+
+volumes:
+  redis-gateway-volume-docker:
     
