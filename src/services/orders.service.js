@@ -1,4 +1,5 @@
 const axios = require('axios');
+const rabbitMQCustom = require('../helpers/rabbitMQ');
 
 const getOneOrder = async (id) => {
   const response = await axios.get(`http://${process.env.ORDER_HOST}:3003/api/orders/${id}`);
@@ -11,8 +12,12 @@ const createOrder = async (payload) => {
 };
 
 const confirmOrder = async (id, payload) => {
-  const response = await axios.post(`http://${process.env.ORDER_HOST}:3003/api/orders/${id}`, payload);
-  return response.data;
+  await rabbitMQCustom('orderConfirmation', {
+    orderId: id,
+    paymentData: payload,
+  });
+
+  return '';
 };
 
 module.exports = {
