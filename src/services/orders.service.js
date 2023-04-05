@@ -1,5 +1,6 @@
 const axios = require('axios');
-const rabbitMQCustom = require('../helpers/rabbitMQ');
+const crypto = require('crypto');
+const confirmOrderToProcessAndPayment = require('./confirmOrderToProcessAndPayment.producer.service');
 
 const getOneOrder = async (id) => {
   const response = await axios.get(`http://${process.env.ORDER_HOST}:3003/api/orders/${id}`);
@@ -12,9 +13,17 @@ const createOrder = async (payload) => {
 };
 
 const confirmOrder = async (id, payload) => {
-  await rabbitMQCustom('orderConfirmation', {
-    orderId: id,
+  const orderToConfirm = await getOneOrder(id);
+  const processHash = crypto.randomBytes(20).toString('hex');
+
+  await confirmOrderToProcessAndPayment('orderConfirmationToPayment', {
     paymentData: payload,
+    processHash,
+  });
+
+  await confirmOrderToProcessAndPayment('orderConfirmationToProcess', {
+    orderData: orderToConfirm,
+    processHash,
   });
 
   return '';

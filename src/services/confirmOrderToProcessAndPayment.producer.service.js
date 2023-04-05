@@ -1,6 +1,6 @@
 const amqplib = require('amqplib');
 
-const rabbitMQCustom = async (exchange, payload) => {
+const confirmOrderToProcessAndPayment = async (exchange, payload) => {
   const connectionMQ = await amqplib.connect('amqp://guest:guest@rabbit-ms-gateway:5672');
   const producerChannel = await connectionMQ.createChannel();
   producerChannel.publish(exchange, '', Buffer.from(JSON.stringify(payload)));
@@ -8,4 +8,4 @@ const rabbitMQCustom = async (exchange, payload) => {
   connectionMQ.close();
 };
 
-module.exports = rabbitMQCustom;
+module.exports = confirmOrderToProcessAndPayment;
