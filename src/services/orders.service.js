@@ -1,5 +1,4 @@
 const axios = require('axios');
-const crypto = require('crypto');
 const confirmOrderToProcessAndPayment = require('./confirmOrderToProcessAndPayment.producer.service');
 
 const getOneOrder = async (id) => {
@@ -14,16 +13,17 @@ const createOrder = async (payload) => {
 
 const confirmOrder = async (id, payload) => {
   const orderToConfirm = await getOneOrder(id);
-  const processHash = crypto.randomBytes(20).toString('hex');
+  const defaultInvoice = await axios.get(`http://${process.env.PAYMENT_HOST}:3004/api/invoices`);
+  const defaultInvoiceData = defaultInvoice.data;
 
   await confirmOrderToProcessAndPayment('orderConfirmationToPayment', {
     paymentData: payload,
-    processHash,
+    invoiceId: defaultInvoiceData.id,
   });
 
   await confirmOrderToProcessAndPayment('orderConfirmationToProcess', {
     orderData: orderToConfirm,
-    processHash,
+    invoiceId: defaultInvoiceData.id,
   });
 
   return '';
