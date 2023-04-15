@@ -24,19 +24,8 @@ services:
     volumes:
       - redis-gateway-volume-docker:/data
 
-  rabbit-ms-gateway:
-    image: rabbitmq:3-management-alpine
-    ports:
-      - 5672:5672
-      - 15672:15672
-    volumes:
-      - rabbit-gateway-volume-data:/var/lib/rabbitmq/
-      - rabbit-gateway-volume-log:/var/log/rabbitmq
-
 volumes:
   redis-gateway-volume-docker:
-  rabbit-gateway-volume-data:
-  rabbit-gateway-volume-log:
 
 networks: 
   default:
