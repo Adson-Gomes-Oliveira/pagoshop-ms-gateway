@@ -15,7 +15,7 @@ services:
       - ORDER_HOST=ms-order
       - PAYMENT_HOST=ms-payment
       - REDIS_HOST=redis-ms-gateway
-      - JWT_SECRET=MTk4OGExOTZkMWYyOWZjZjlmOTcwMWVjZWRjMzc1MzZkOGM0MmFjMjQ0NjcyZjIzZDQwOGU4YTQ1YWQ3NTRjZA==
+      - JWT_SECRET=secret
   
   redis-ms-gateway:
     image: redis:7
