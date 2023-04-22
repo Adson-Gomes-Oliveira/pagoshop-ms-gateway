@@ -9,11 +9,11 @@ services:
       - ./:/app/ms-gateway
     environment:
       - PORT=5000
-      - PRODUCT_HOST=ms-product
-      - CATEGORY_HOST=ms-product
-      - ACCOUNT_HOST=ms-account
-      - ORDER_HOST=ms-order
-      - PAYMENT_HOST=ms-payment
+      - PRODUCT_HOST=ms-product:3001
+      - CATEGORY_HOST=ms-product:3001
+      - ACCOUNT_HOST=ms-account:3002
+      - ORDER_HOST=ms-order:3003
+      - PAYMENT_HOST=ms-payment:3004
       - REDIS_HOST=redis-ms-gateway
       - JWT_SECRET=secret
   
