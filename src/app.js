@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(helmet());
 app.use(cors({ exposedHeaders: 'Authorization' }));
 
-app.get('/health-check', (_req, res) => res.status(200).send('Connection OK'));
+app.get('/health-check', (_req, res) => res.status(200).send('OK!'));
 app.use('/api/auth', routes.authenticationRoutes);
 app.use('/api/products', routes.productsRoutes);
 app.use('/api/categories', routes.categoriesRoutes);
